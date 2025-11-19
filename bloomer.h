@@ -29,14 +29,13 @@
 #include "autos.h"
 
 //MÓDULO 5: FONDOS MUTUOS
-#include "fondosmutuos.h"
+#include "fondosMutuos.h"
 
 //MÓDULO 6: TERRENOS
 #include "terrenos.h"
 
 //MÓDULO 7: AGENDA
 #include "agenda.h"
-#include "fechas.h"
 
 //MÓDULO 8: BENEFICIOS
 #include "beneficios.h"
