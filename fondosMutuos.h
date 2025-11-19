@@ -4,17 +4,17 @@
 #include "constante.h"  // Define MAX_REGISTROS = 100
 
 // Límites para cadenas
-#define MAX_ID         40  
-#define MAX_BANCO      50
+#define MAX_ID         40
+#define MAX_BANCOS      50
 #define MAX_RUT        13   // "12.345.678-9"
 
 // Estructura FondosMutuos
 typedef struct {
     char id[MAX_ID];             
     double ahorros;   
-    double interesTotales;                       
+    double interesTotal;                       
     double tasaInteres;
-    char banco[MAX_BANCO];
+    char banco[MAX_BANCOS];
     double proyeccionMensual;
     double proyeccionAnual;
     char rutAsociado[MAX_RUT];       
@@ -25,7 +25,7 @@ extern FondoMutuo fondosMutuos[MAX_REGISTROS];
 extern int totalFondosMutuos;
 
 // Prototipos de funciones
-void menuFondosMutuos(void);
+int menuFondosMutuos(void);
 void agregarFondosMutuos(void);
 void listarFondosMutuosPorRut(const char* rut);
 void editarFondosMutuos(void);
