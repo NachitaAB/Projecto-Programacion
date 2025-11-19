@@ -106,8 +106,8 @@ void agregarAgenda(void) {
     // ¿Cíclico?
     printf("¿Es una cita cíclica? (s/n): ");
     fgets(buffer, sizeof(buffer), stdin);
-    a.ciclico = (buffer[0] == 's' || buffer[0] == 'S');
-    if (a.ciclico) {
+    a.esCiclica = (buffer[0] == 's' || buffer[0] == 'S');
+    if (a.esCiclica) {
         printf("Seleccione la fecha de repetición:\n");
         seleccionarFecha(a.fechaRepeticion);
     } else {
@@ -123,7 +123,7 @@ void agregarAgenda(void) {
 }
 
 //Lista todas las agendas asociadas a un RUT dado
-void listarAgenda(const char* rut) {
+void listarAgendaPorRut(const char* rut) {
     int encontrados = 0;
     printf("\n------ AGENDA para RUT %s ------\n", rut);
     for (int i = 0; i < totalAgenda; i++) {
@@ -134,7 +134,7 @@ void listarAgenda(const char* rut) {
             printf("Título: %s\n", agenda[i].titulo);
             printf("Detalle: %s\n", agenda[i].detalle);
             printf("Invitados: %s\n", agenda[i].invitados);
-            printf("Cíclico: %s\n", agenda[i].ciclico ? "Sí" : "No");
+            printf("Cíclico: %s\n", agenda[i].esCiclica ? "Sí" : "No");
             printf("------------------------\n");
         }
     }
@@ -178,7 +178,7 @@ void editarAgenda(void) {
     printf("Fecha: %s | Hora: %s\n", a->fechaCita, a->horaCita);
     printf("Título: %s\n", a->titulo);
     printf("RUT asociado: %s\n", a->rutAsociado);
-    printf("Cíclica: %s\n", a->ciclico ? "Sí" : "No");
+    printf("Cíclica: %s\n", a->esCiclica ? "Sí" : "No");
 
     //Editar campos (solo si el usuario ingresa algo)
 
@@ -226,12 +226,52 @@ void editarAgenda(void) {
     }
 
     // ¿Cíclico?
-    printf("Cíclico: %s\n", agenda[i].ciclico ? "Sí" : "No");
-    if (agenda[i].ciclico) {
-        printf("Fecha de repetición: %s\n", agenda[i].fechaRepeticion);
+    printf("Cíclico: %s\n", a->esCiclica ? "Sí" : "No");
+    if (a->esCiclica) {
+        printf("Fecha de repetición: %s\n", a->fechaRepeticion);
     }
 
     printf("Cita actualizada correctamente.\n");
+}
+//Elimina una cita de la agenda
+void eliminarAgenda(void) {
+    if (totalAgenda == 0) {
+        printf("No hay citas para eliminar.\n");
+        return;
+    }
+
+    char idIngresado[40];
+    printf("Ingrese el email (ID) de la cita a eliminar: ");
+    char buffer[100];
+    fgets(buffer, sizeof(buffer), stdin);
+    buffer[strcspn(buffer, "\n")] = '\0';
+    strncpy(idIngresado, buffer, sizeof(idIngresado) - 1);
+    idIngresado[sizeof(idIngresado) - 1] = '\0';
+
+    int idx = -1;
+    for (int i = 0; i < totalAgenda; i++) {
+        if (strcmp(agenda[i].id, idIngresado) == 0) {
+            idx = i;
+            break;
+        }
+    }
+
+    if (idx == -1) {
+        printf("No se encontró una cita con ese ID.\n");
+        return;
+    }
+
+    printf("¿Eliminar la cita de %s? (s/n): ", agenda[idx].id);
+    fgets(buffer, sizeof(buffer), stdin);
+    if (buffer[0] == 's' || buffer[0] == 'S') {
+        for (int i = idx; i < totalAgenda - 1; i++) {
+            agenda[i] = agenda[i + 1];
+        }
+        totalAgenda--;
+        printf("Cita eliminada.\n");
+    } else {
+        printf("Eliminación cancelada.\n");
+    }
 }
 //Menú interactivo del módulo agenda
 int menuAgenda(void) {
