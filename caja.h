@@ -1,7 +1,7 @@
 #ifndef CAJA_H
 #define CAJA_H
 
-#define NUM_CAJA 11
+#define NUM_CAJA 5
 
 extern const char* CAJA_VALIDOS[NUM_CAJA];
 
