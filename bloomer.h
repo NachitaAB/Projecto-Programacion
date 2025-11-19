@@ -36,6 +36,7 @@
 
 //MÓDULO 7: AGENDA
 #include "agenda.h"
+#include "fechas.h"
 
 //MÓDULO 8: BENEFICIOS
 #include "beneficios.h"
