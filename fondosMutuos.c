@@ -112,7 +112,7 @@ void agregarFondosMutuos(void) {
     }
 
     //Interés total generado (calculado o ingresado) ---
-    f.interesTotales = f.ahorros * f.tasaInteres;
+    f.interesTotal = f.ahorros * f.tasaInteres;
 
     //Banco
     printf("Banco (ej: Santander, BCI, Estado): ");
@@ -155,7 +155,7 @@ void listarFondosMutuosPorRut(const char* rut){
             encontrado = 1;
             printf("\n[ID: %s]\n", fondosMutuos[i].id);
             printf("Ahorros: $%.0f CLP\n", fondosMutuos[i].ahorros);
-            printf("Interés total generado: $%.0f CLP\n", fondosMutuos[i].interesTotales);
+            printf("Interés total generado: $%.0f CLP\n", fondosMutuos[i].interesTotal);
             printf("Tasa de interés: %.2f%%\n", fondosMutuos[i].tasaInteres * 100);
             printf("Banco: %s\n", fondosMutuos[i].banco);
             printf("Proyección mensual: $%.0f CLP\n", fondosMutuos[i].proyeccionMensual);
@@ -240,7 +240,7 @@ void editarFondosMutuos(){
     }
 
     //Recalcular campos derivados (con recursividad)
-    f->interesTotales = f->ahorros * f->tasaInteres;
+    f->interesTotal = f->ahorros * f->tasaInteres;
     f->proyeccionMensual = calcularProyeccionRecursiva(f->ahorros, f->tasaInteres / 12, 1);
     f->proyeccionAnual = calcularProyeccionRecursiva(f->ahorros, f->tasaInteres / 12, 12);
 
@@ -297,7 +297,7 @@ void eliminarFondosMutuos(){
 }
 
 //Menú interactivo del módulo fondos mutuos
-int menuFondosMutuos() {
+int menuFondosMutuos(void) {
     int opcion;
     do {
         char buffer[20];

@@ -5,12 +5,12 @@
 #include "validaciones.h" 
 
 // Definiciones de listas (pueden ir aquí o en otro archivo)
-const char* MARCAS_VALIDAS[NUM_MARCAS] = {
+const char* MARCAS_VALIDAS[NUM_AUTOS] = {
     "Toyota", "Hyundai", "Kia", "Chevrolet", "Nissan",
     "Suzuki", "Peugeot", "Ford", "Mazda", "Honda"
 };
 
-const char* MODELOS_VALIDOS[NUM_MARCAS][NUM_MODELOS] = {
+const char* MODELOS_VALIDOS[NUM_AUTOS][NUM_MODELOS] = {
     {"Yaris", "Corolla", "RAV4", "Hilux", "Prado"},
     {"Accent", "Tucson", "Elantra", "Santa Fe", "Creta"},
     {"Rio", "Sportage", "Sorento", "Picanto", "Cerato"},
@@ -35,14 +35,14 @@ void seleccionarAuto(char marca[], char modelo[], char color[], int* anio, int t
 
     //Seleccionar marca
     printf("\n--- Marcas disponibles ---\n");
-    for (int i = 0; i < NUM_MARCAS; i++) {
+    for (int i = 0; i < NUM_AUTOS; i++) {
         printf("%2d. %s\n", i + 1, MARCAS_VALIDAS[i]);
     }
     while (1) {
-        printf("Seleccione una marca (1-%d): ", NUM_MARCAS);
+        printf("Seleccione una marca (1-%d): ", NUM_AUTOS);
         fgets(buffer, sizeof(buffer), stdin);
         buffer[strcspn(buffer, "\n")] = '\0';
-        if (leerEntero(buffer, &opcion) && opcion >= 1 && opcion <= NUM_MARCAS) {
+        if (leerEntero(buffer, &opcion) && opcion >= 1 && opcion <= NUM_AUTOS) {
             strncpy(marca, MARCAS_VALIDAS[opcion - 1], tam - 1);
             marca[tam - 1] = '\0';
             break;

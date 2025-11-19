@@ -6,7 +6,7 @@
 // Definición de límites para campos de texto
 #define MAX_NOMBRE      20   // suficiente para 19 caracteres + '\0'
 #define MAX_RUT         13   // "12.345.678-9" + '\0'
-#define MAX_DIRECCION   60
+#define MAX_DIRECCION   100
 #define MAX_EMAIL       40
 #define MAX_FECHA       11   // "dd/mm/aaaa" + '\0'
 

@@ -34,7 +34,7 @@ void menuPrincipal(){
             end++;
         }
         // Validar que toda la cadena fue consumida y está en rango
-        if (*end == '\0' && val >= 1 && val <= 5) {
+        if (*end == '\0' && val >= 0 && val <= 8) {
             opcion = (int)val;
         } else {
             opcion = -1;

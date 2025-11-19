@@ -4,6 +4,7 @@
 #include "constante.h"  // Define MAX_REGISTROS = 100
 
 // Límites para cadenas
+#define MAX_ID         40
 #define MAX_TITULO      50
 #define MAX_DETALLE     200
 #define MAX_INVITADOS   200  // Lista separada por comas: "Juan,Pedro,Ana"
@@ -11,7 +12,7 @@
 
 // Estructura Agenda
 typedef struct {
-    int id;            //Considerando numero de telefono                  
+    char id[MAX_ID];       //Considerando email como ID único             
     char fechaCita[11];                  
     char horaCita[6];                    
     char titulo[MAX_TITULO];             
@@ -28,7 +29,7 @@ extern Agenda agenda[MAX_REGISTROS];
 extern int totalAgenda;
 
 // Prototipos de funciones
-void menuAgenda(void);
+int menuAgenda(void);
 void agregarAgenda(void);
 void listarAgendaPorRut(const char* rut);
 void editarAgenda(void);

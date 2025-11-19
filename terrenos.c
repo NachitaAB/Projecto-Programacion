@@ -3,7 +3,7 @@
 #include <stdlib.h> //strtol() : convierte una cadena en un número entero largo
 #include <ctype.h> //Funciones para caracteres (toupper, etc.....)
 #include "terrenos.h"
-#include "miembros.h"
+#include "miembros.h"         // para verificar que el RUT exista
 #include "validaciones.h"
 #include "constante.h"
 
@@ -27,11 +27,11 @@ void eliminarTerrenosPorRut(const char* rut) {
         }
     }
 }
-void agregarTerrenos(){
+void agregarTerrenos(void){
 
     if (totalTerrenos >= MAX_REGISTROS){
         printf("Límite de %d terrenos alcanzados.\n", MAX_REGISTROS);
-        return 0;
+        return;
     }
 
     //Validar RUT del cliente
@@ -78,7 +78,7 @@ void agregarTerrenos(){
         fgets(buffer, sizeof(buffer), stdin);
         buffer[strcspn(buffer, "\n")] = '\0';
         if (leerEntero(buffer, &m2Totales) && m2Totales >= 1) {
-            t.m2Totales = m2Totales;
+            t.metrosTotales = m2Totales;
             break;
         } else {
             printf("Ingrese un número entero ≥ 1.\n");
@@ -92,7 +92,7 @@ void agregarTerrenos(){
         fgets(buffer, sizeof(buffer), stdin);
         buffer[strcspn(buffer, "\n")] = '\0';
         if (leerEntero(buffer, &m2Construccion) && m2Construccion >= 0 && m2Construccion <= m2Totales) {
-            t.m2Construccion = m2Construccion;
+            t.metrosConstruccion = m2Construccion;
             break;
         } else {
             printf("Debe ser ≥ 0 y ≤ %d.\n", m2Totales);
@@ -170,8 +170,8 @@ void listarTerrenosPorRut(const char* rut) {
         if (strcmp(terrenos[i].rutAsociado, rut) == 0) {
             encontrado = 1;
             printf("Rol: %s\n", terrenos[i].rolTerreno);
-            printf("Metros cuadrados: %d\n", terrenos[i].m2Totales);
-            printf("Metros cuadrados construidos: %d\n", terrenos[i].m2Construccion);
+            printf("Metros cuadrados: %.2f\n", terrenos[i].metrosTotales);
+            printf("Metros cuadrados construidos: %.2f\n", terrenos[i].metrosConstruccion);
             printf("Dirección: %s\n", terrenos[i].direccion);
             printf("¿Apto para edificio?: %s\n", terrenos[i].aptoEdificio ? "Sí" : "No");
             printf("Tasación: $%.0f CLP\n", terrenos[i].tasacion);
@@ -214,11 +214,12 @@ void editarTerrenos(void) {
     }
 
     Terreno* t = &terrenos[idx];
+    
     printf("\nTerreno encontrado:\n");
     printf("Rol: %s | RUT: %s\n", t->rolTerreno, t->rutAsociado);
     printf("Ubicación: %s | Estado: %s\n", t->direccion, t->estado);
-    printf("M²: total=%d, construcción=%d | Apto edificio: %s\n",
-           t->m2Totales, t->m2Construccion,
+    printf("M²: total=%2f, construcción=%2f | Apto edificio: %s\n",
+           t->metrosTotales, t->metrosConstruccion,
            t->aptoEdificio ? "Sí" : "No");
 
     // --- Editar cada campo (solo si el usuario ingresa algo) ---
@@ -233,28 +234,28 @@ void editarTerrenos(void) {
     }
 
     // M² totales
-    printf("Nuevos m² totales (actual: %d): ", t->m2Totales);
+    printf("Nuevos m² totales (actual: %2f): ", t->metrosTotales);
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
     if (strlen(buffer) > 0) {
         int m2;
         if (leerEntero(buffer, &m2) && m2 >= 1) {
-            t->m2Totales = m2;
+            t->metrosTotales = m2;
         } else {
             printf("M² totales inválidos. No se actualizó.\n");
         }
     }
 
     // M² para construcción (debe ser ≤ m² totales)
-    printf("Nuevos m² para construcción (actual: %d, ≤ %d): ", t->m2Construccion, t->m2Totales);
+    printf("Nuevos m² para construcción (actual: %2f, ≤ %2f): ", t->metrosConstruccion, t->metrosTotales);
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
     if (strlen(buffer) > 0) {
         int m2;
-        if (leerEntero(buffer, &m2) && m2 >= 0 && m2 <= t->m2Totales) {
-            t->m2Construccion = m2;
+        if (leerEntero(buffer, &m2) && m2 >= 0 && m2 <= t->metrosTotales) {
+            t->metrosConstruccion = m2;
         } else {
-            printf("Debe ser ≥ 0 y ≤ %d. No se actualizó.\n", t->m2Totales);
+            printf("Debe ser ≥ 0 y ≤ %2f. No se actualizó.\n", t->metrosTotales);
         }
     }
 
@@ -311,7 +312,7 @@ void editarTerrenos(void) {
 }
 
 //Elimina un registro de los terrenos por patente
-void eliminarTerrenos() {
+void eliminarTerrenos(void) {
     if (totalTerrenos == 0) {
         printf("No hay terrenos registrados para eliminar.\n");
         return;
@@ -341,16 +342,16 @@ void eliminarTerrenos() {
 
     // Mostrar datos del terreno a eliminar
     printf("\n¿Eliminar este terreno?\n");
-    printf("ID: %s\n", terrenos[idx].id);
+    printf("ID: %d\n", terrenos[idx].id);
     printf("RUT asociado: %s\n", terrenos[idx].rutAsociado);
-    printf("M² totales: %d | M² construcción: %d\n", terrenos[idx].m2Totales, terrenos[idx].m2Construccion);
+    printf("M² totales: %.2f | M² construcción: %.2f\n", terrenos[idx].metrosTotales, terrenos[idx].metrosConstruccion);
     printf("Tasación: $%.0f CLP\n", terrenos[idx].tasacion);
     printf("¿Está seguro? (s/n): ");
 
     fgets(buffer, sizeof(buffer), stdin);
     if (buffer[0] == 's' || buffer[0] == 'S') {
         // Eliminar desplazando elementos
-        for (int i = idx; i < totalFondosMutuos - 1; i++) {
+        for (int i = idx; i < totalTerrenos - 1; i++){
             terrenos[i] = terrenos[i + 1];
         }
         totalTerrenos--;
@@ -360,7 +361,7 @@ void eliminarTerrenos() {
     }
 }
 //Menú interactivo del módulo terrenos
-int menuTerrenos() {
+int menuTerrenos(void) {
     int opcion;
     do {
         char buffer[20];

@@ -11,6 +11,7 @@
 
 // Estructura Terreno
 typedef struct {
+    int id;
     char rolTerreno[MAX_ROL_TERRENO];    
     double metrosTotales;                
     double metrosConstruccion;           
@@ -27,7 +28,7 @@ extern Terreno terrenos[MAX_REGISTROS];
 extern int totalTerrenos;
 
 // Prototipos de funciones
-void menuTerrenos(void);
+int menuTerrenos(void);
 void agregarTerrenos(void);
 void listarTerrenosPorRut(const char* rut);
 void editarTerrenos(void);
