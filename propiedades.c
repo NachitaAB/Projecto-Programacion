@@ -3,7 +3,7 @@
 #include <stdlib.h> //strtol() : convierte una cadena en un número entero largo
 #include <ctype.h> //punciones para caracteres (touffer, etc.....)
 #include "propiedades.h"
-#include "miembro.h"         // para veripicar que el RUT exista
+#include "miembros.h"        
 #include "validaciones.h"    // para validar RUT y pecha
 
 // Depinición de variables globales
@@ -314,7 +314,7 @@ void eliminarPropiedades(void) {
 }
 
 //Menú interactivo del módulo propiedades 
-int menuPropiedades() {
+int menuPropiedades(void) {
     int opcion;
     do {
         char buffer[20];
