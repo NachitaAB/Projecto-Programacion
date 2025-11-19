@@ -8,10 +8,10 @@
 #define MAX_DETALLE       200
 #define MAX_CONDICIONES   200
 #define MAX_RUT           13   // "12.345.678-9"
-
+#define MAX_ID            40
 // Estructura Beneficio
 typedef struct {
-    int id;                                     
+    char id[MAX_ID];                                 
     char cajaCompensacion[MAX_CAJA];            
     char detalle[MAX_DETALLE];                  
     double porcentajeDescuento;                 
@@ -26,7 +26,7 @@ extern Beneficio beneficios[MAX_REGISTROS];
 extern int totalBeneficios;
 
 // Prototipos de funciones
-void menuBeneficios(void);
+int menuBeneficios(void);
 void agregarBeneficios(void);
 void listarBeneficiosPorRut(const char* rut);
 void editarBeneficios(void);
