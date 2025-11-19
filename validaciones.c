@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include <limits.h> //INT_MIN: define el valor mínimo para un entero, INT_MAX: define el valor máximo para un entero
 #include "validaciones.h"
