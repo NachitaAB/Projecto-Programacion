@@ -27,10 +27,10 @@ extern int totalBeneficios;
 
 // Prototipos de funciones
 void menuBeneficios(void);
-void agregarBeneficio(void);
+void agregarBeneficios(void);
 void listarBeneficiosPorRut(const char* rut);
-void editarBeneficio(void);
-void eliminarBeneficio(void);
+void editarBeneficios(void);
+void eliminarBeneficios(void);
 void eliminarBeneficiosPorRut(const char* rut); // para eliminación en cascada
 
 #endif
