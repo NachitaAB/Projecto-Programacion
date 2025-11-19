@@ -141,7 +141,7 @@ void agregarFondosMutuos(void) {
 }
 
 //Muestra todos los fondos mutuos de un miembro por su rut 
-void listarFondosMutuos(const char* rut){
+void listarFondosMutuosPorRut(const char* rut){
     if (!rut) {
         printf("RUT inválido.\n");
         return;
