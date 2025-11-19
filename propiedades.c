@@ -239,7 +239,7 @@ void editarPropiedades(void) {
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
     if (strlen(buffer) == 1) {
-        char t = touffer(buffer[0]);
+        char t = toupper(buffer[0]);
         if (t >= 'A' && t <= 'H') p->torre = t;
     }
 
