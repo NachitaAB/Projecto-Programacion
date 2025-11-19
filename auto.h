@@ -6,6 +6,7 @@
 #define NUM_COLORES 5
 #define NUM_ANIOS 5
 
+
 // Estructura para guardar la información de un auto
 typedef struct {
     const char* marca;
