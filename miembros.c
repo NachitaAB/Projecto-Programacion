@@ -4,8 +4,12 @@
 #include <ctype.h> //Funciones para caracteres (toupper, etc.....)
 #include "miembros.h" //incluimos la cabecera para acceder a la struct y prototipos
 #include "finanzas.h"
+#include "terrenos.h"
 #include "vehiculos.h"
-#include "fondosmutuos.h"
+#include "fondosMutuos.h"
+#include "propiedades.h"
+#include "agenda.h"
+#include "beneficios.h"
 #include "validaciones.h"
 #include "constante.h"
 
