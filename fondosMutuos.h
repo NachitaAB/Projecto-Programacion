@@ -4,7 +4,7 @@
 #include "constante.h"  // Define MAX_REGISTROS = 100
 
 // Límites para cadenas
-#define MAX_ID         13  
+#define MAX_ID         40  
 #define MAX_BANCO      50
 #define MAX_RUT        13   // "12.345.678-9"
 

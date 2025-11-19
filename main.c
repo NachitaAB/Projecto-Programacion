@@ -4,7 +4,7 @@
 void menuPrincipal(){
 
     int opcion, c;
-    
+    char buffer[20];    
     do{
         printf("\n------Sistema Bloomer------\n");
         printf("1. Miembros\n");

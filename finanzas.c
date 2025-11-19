@@ -3,7 +3,7 @@
 #include <stdlib.h> //strtol() : convierte una cadena en un número entero largo
 #include <ctype.h> //Funciones para caracteres (toupper, etc.....)
 #include "finanzas.h"
-#include "miembro.h"         // para verificar que el RUT exista
+#include "miembros.h"         // para verificar que el RUT exista
 #include "validaciones.h"    // para validar RUT y fecha
 #include "bancos.h"          // para seleccionar banco válido
 
@@ -161,6 +161,7 @@ void editarFinanzas(void) {
 
     //Editar número de cuenta 
     printf("Nuevo número de cuenta (actual: %s): ", finanzas[id].numeroCuenta);
+    char buffer[20];
     fgets(buffer, sizeof(buffer), stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
     if (strlen(buffer) > 0) {
