@@ -26,7 +26,7 @@
 
 //MÓDULO 4: VEHÍCULOS
 #include "vehiculo.h"
-#include "autos.h"
+#include "auto.h"
 
 //MÓDULO 5: FONDOS MUTUOS
 #include "fondosMutuos.h"
